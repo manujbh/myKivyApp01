@@ -1,0 +1,55 @@
+#:kivy 1.0.9
+
+<RootContainer>:
+	lbl1: my_labelC
+	lbl2: my_labelCE
+
+	BoxLayout:
+		id: my_box01
+		orientation: 'vertical'
+		spacing: 20
+		padding: 20
+
+		Button:
+			id: my_buttonAC
+			text: "Access Control (AC)"
+			text_size: self.size
+			size_hint: (.5,1)
+			on_press: root.print_ids()
+
+		Button:
+			id: my_buttonAT
+			text: "IT Security Awareness and Training (AT)"
+			text_size: self.size
+			size_hint: (.5,1)
+			on_press: root.clickAction1(self)
+
+    BoxLayout:
+		orientation: 'vertical'
+		spacing: 20
+		padding: 20
+
+		Label:
+			id: my_labelCN
+			text: "Control Number displayed here"
+			text_size: self.size
+
+		Label:
+			id: my_labelC
+			text: "Click button for content to be displayed here"
+			text_size: self.size
+		
+		BoxLayout:
+			spacing: 20
+			padding: 20
+
+			Label:
+				id: my_labelCE
+				text: "Control Enhancement displayed here"
+				text_size: self.size
+
+			Label:
+				id: my_labelCS
+				text: "Control sub-step displayed here"
+				text_size: self.size
+
