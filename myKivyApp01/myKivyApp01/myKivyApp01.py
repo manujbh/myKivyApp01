@@ -7,7 +7,8 @@ from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ObjectProperty
 
-conn = sqlite3.connect('C:\Users\USER-MB\source\GIT_Repos\myKivyApp01\myKivyAppDB.db')
+sqlite_db = "C:/Users/USER-MB/source/GIT_Repos/myKivyApp01/myKivyAppDB.db"
+conn = sqlite3.connect(sqlite_db)
 c = conn.cursor()
 
 class RootContainer(BoxLayout):
@@ -19,12 +20,10 @@ class RootContainer(BoxLayout):
         #self.lbl1.text = msg
         print(instance)
         print(instance.text[0:5])
-        temp = c.execute('''select enhancement from moderateBaseline where id=1''')
-        print(temp)
-        # Query table
-        #c.execute('''CREATE TABLE stocks
-             #(date text, trans text, symbol text, qty real, price real)''')
-        
+        #execute query
+        c.execute('''select enhancement from moderateBaseline where id=1''')
+        #fetch results of query
+        print(c.fetchall())
 
 class MBApp(App):
     # this is a native function from Kivy to actually build the app using KV files
