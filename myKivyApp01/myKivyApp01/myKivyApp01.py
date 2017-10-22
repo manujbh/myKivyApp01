@@ -13,7 +13,7 @@ class RootContainer(BoxLayout):
         # update "lbl1" and "lbl2" with the appropriate content. 
         #self.lbl1.text = msg
         print(instance)
-        
+
     def print_ids(self, *args):
         print("\nids:")
         for widget in self.walk():
