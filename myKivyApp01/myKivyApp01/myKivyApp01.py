@@ -1,5 +1,6 @@
 import kivy
 import sqlite3
+import string
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.label import Label
@@ -15,15 +16,23 @@ class RootContainer(BoxLayout):
     instance = ObjectProperty(None)
 
     def clickAction1(self, instance):
-        # instead of accepting "msg". identify which button was pressed and query from DB the appropriate content. Then start the chain of events for updates.
-        # update "lbl1" and "lbl2" with the appropriate content. 
-        #self.lbl1.text = msg
-        print(instance)
-        print(instance.text[0:5])
+        #print(instance)
+        #identify the button pressed
+        buttonText = (instance.text[0:2],)
+        print(buttonText)
+        
+        #use button text to query all related button info from DB
+        #c.execute('select * from moderateBaseline where id=?',buttonText)
         #execute query
-        c.execute('''select enhancement from moderateBaseline where id=1''')
-        #fetch results of query
-        print(c.fetchall())
+        t = (1,)
+        c.execute('select * from moderateBaseline where id=?',t)
+        #fetch results of query, fetchall() can only be used once
+        results = c.fetchall()
+        print(results[0][3])
+        self.lbl1.text = results[0][4]
+        self.lbl2.text = results[0][2]
+        
+
 
 class MBApp(App):
     # this is a native function from Kivy to actually build the app using KV files
