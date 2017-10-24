@@ -6,6 +6,7 @@
 	lbl2: my_labelCE
 	lbl3: my_buttonAC
 	lbl4: my_buttonAT
+	lbl5: my_labelCS
 
 	BoxLayout:
 		id: my_box01
@@ -27,8 +28,10 @@
 			size_hint: (.5,1)
 			on_press: root.clickAction1(self)
 
-    BoxLayout:
-		orientation: 'vertical'
+    GridLayout:
+		rows: 3
+		size_hint_y: None
+		height: self.minimum_height
 		spacing: 20
 		padding: 20
 
@@ -36,23 +39,24 @@
 			id: my_labelCN
 			text: "Control Number displayed here"
 			text_size: self.size
-
 		Label:
 			id: my_labelC
 			text: "Click button for content to be displayed here"
 			text_size: self.size
 		
-		BoxLayout:
-			spacing: 20
-			padding: 20
+		ScrollView:
+			size_hint: (None, None)
+			size: (400, 400)
 
-			Label:
-				id: my_labelCE
-				text: "Control Enhancement displayed here"
-				text_size: self.size
+			GridLayout:
+				cols: 2
+				size_hint_y: None
+				height: self.minimum_height
 
-			Label:
-				id: my_labelCS
-				text: "Control sub-step displayed here"
-				text_size: self.size
+				Label:
+					id: my_labelCE
+					text: "Control Enhancement displayed here"
+				Label:
+					id: my_labelCS
+					text: "Control sub-step displayed here"
 
