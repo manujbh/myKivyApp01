@@ -40,7 +40,7 @@ class RootContainer(BoxLayout):
         print(results)
         print(results[0][3])
         self.lbl1.text = results[1][4]
-        self.lbl2.text = '\n'.join([x[2] for x in results])
+        #self.lbl2.text = '\n'.join([x[2] for x in results])
         self.lbl5.text = '\n'.join([x[3] for x in results])
 
         # dynamically add buttons 
