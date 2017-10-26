@@ -18,6 +18,11 @@ c = conn.cursor()
 
 class RootContainer(BoxLayout):
     instance = ObjectProperty(None)
+    layout_content = ObjectProperty(None)
+
+    def __init__(self, **kwargs):
+        super(RootContainer, self).__init__(**kwargs)
+        self.layout_content.bind(minimum_height=self.layout_content.setter('height'))
 
     def clickAction1(self, instance):
         #print(instance)
