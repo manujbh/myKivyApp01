@@ -8,13 +8,16 @@ from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.properties import ObjectProperty
+from kivy.properties import StringProperty
 from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
-from kivy.app import runTouchApp
 
 sqlite_db = "C:/Users/USER-MB/source/GIT_Repos/myKivyApp01/myKivyAppDB.db"
 conn = sqlite3.connect(sqlite_db)
 c = conn.cursor()
+
+class ScrollableLabel(ScrollView):
+    pass
 
 class RootContainer(BoxLayout):
     instance = ObjectProperty(None)
@@ -22,7 +25,6 @@ class RootContainer(BoxLayout):
 
     def __init__(self, **kwargs):
         super(RootContainer, self).__init__(**kwargs)
-        self.layout_content.bind(minimum_height=self.layout_content.setter('height'))
 
     def clickAction1(self, instance):
         #print(instance)
@@ -41,7 +43,15 @@ class RootContainer(BoxLayout):
         print(results[0][3])
         self.lbl1.text = results[1][4]
         #self.lbl2.text = '\n'.join([x[2] for x in results])
-        self.lbl5.text = '\n'.join([x[3] for x in results])
+        myresult = '\n'.join([x[3] for x in results])
+        self.lbl5.text = myresult
+        #self.lbl5.text = '\n'.join([x[3] for x in results])
+
+        #get to parent ScrollView and bind
+        scrollable = ScrollView(size_hint=(1, None), size=(Window.width, Window.height))
+        #following doesn't work. Error says "cannot add object, it already has a parent
+        #scrollable.add_widget(self.lbl5)
+        
 
         # dynamically add buttons 
         #for x in L:

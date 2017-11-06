@@ -7,7 +7,7 @@
 	lbl3: my_buttonAC
 	lbl4: my_buttonAT
 	lbl5: my_labelCS
-	layout_content: layout_content
+	#lbl6: grid_labelCS
 
 	BoxLayout:
 		id: my_box01
@@ -39,61 +39,46 @@
     GridLayout:
 		rows: 3
 		cols: 1
-		spacing: 20
-		padding: 20
+		spacing: 10
+		padding: 10
 
 		canvas: 
 			Color: 
-				rgb: 0, .83, 0  
+				rgb: 0, .63, 0  
 			Rectangle: 
 				pos: self.pos 
 				size: self.size
 
+		Label:
+			id: my_labelCN
+			canvas.before:
+				Color:
+					rgb: 0,0,0
+				Rectangle:
+					pos: self.pos
+					size: self.size
+			text: "Current control step (number)"
+			text_size: self.size
+
+
+		Label:
+			id: my_labelC
+			canvas.before:
+				Color:
+					rgb: 0,0,0
+				Rectangle:
+					pos: self.pos
+					size: self.size
+			text: "Click button for content to be displayed here. Content for button clicked ......."
+			text_size: self.size
 		
-	    GridLayout:
-			cols: 1
-			padding: 20
-			canvas: 
-				Color: 
-					rgb: 0, 0, 0 
-				Rectangle: 
-					pos: self.pos 
+		Label:
+			id: my_labelCS
+			canvas.before:
+				Color:
+					rgb: 0,0,0
+				Rectangle:
+					pos: self.pos
 					size: self.size
-			Label:
-				id: my_labelCN
-				text: "Current control step (number)"
-				text_size: self.size
-
-
-	    GridLayout:
-			cols: 1
-			padding: 20
-			canvas: 
-				Color: 
-					rgb: 0, 0, 0 
-				Rectangle: 
-					pos: self.pos 
-					size: self.size
-			Label:
-				id: my_labelC
-				text: "Click button for content to be displayed here. Content for button clicked ......."
-				text_size: self.size
-		
-		GridLayout:
-			id: layout_content
-			cols: 1
-			padding: 20
-
-			canvas: 
-				Color: 
-					rgb: 0, 0, 0 
-				Rectangle: 
-					pos: self.pos 
-					size: self.size
-
-			ScrollView:
-				size_hint: (None, None)
-				Label:
-					id: my_labelCS
-					text: "Control sub-step list"
+			text: "Control sub-step list"
 
