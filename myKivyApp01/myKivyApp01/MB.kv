@@ -4,7 +4,8 @@
 	id: theRoot
 	lbl1: my_labelH
 	lbl2: my_labelC
-	lbl3: my_labelCS
+	lbl3: my_btnGrid
+	lbl4: my_btnScroll
 
 	BoxLayout:
 		id: my_box01
@@ -81,18 +82,22 @@
 				text: "Click button for content to be displayed here. Content for button clicked ......."
 		
 		ScrollView:
+			id: my_btnScroll
 			bar_width: 12
 			bar_color: 0, .63, 0, .9
-			Label:
-				id: my_labelCS
+			GridLayout:
+				id: my_btnGrid
+				cols: 3
 				size_hint: 1, None
-				text_size: self.width, None
-				height: self.texture_size[1]
-				canvas.before:
+				#following forces the defined height of the child (i.e. button)
+				row_force_default: True
+				row_default_height: 30
+				canvas:
 					Color:
 						rgb: 0,0,0
 					Rectangle:
 						pos: self.pos
 						size: self.size
-				text: "Control sub-step list"
+				Label:
+					text: "Scrolling text goes here ....."
 

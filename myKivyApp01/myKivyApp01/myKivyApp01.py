@@ -45,12 +45,12 @@ class RootContainer(BoxLayout):
         print(results)
         print(results[0][3])
         self.lbl2.text = results[1][4]
-        #self.lbl1.text = '\n'.join([x[2] for x in results])
-        #myresult = '\n'.join([x[3] for x in results])
-        #self.lbl3.text = myresult
+        # set height of grid before populating with buttons
+        self.lbl3.bind(minimum_height=self.lbl3.setter('height'))
+        # dynamically add buttons
         for x in results:
-            print(x[3] + ' dd')
-            self.lbl3.text = self.lbl3.text + x[3]
+            self.lbl3.add_widget(Button(text=str(x[3])))
+
 
 
         # dynamically add buttons 
