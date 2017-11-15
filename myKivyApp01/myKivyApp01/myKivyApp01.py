@@ -12,6 +12,10 @@ from kivy.properties import StringProperty
 from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
 
+# if there is a need to load another kv file
+#from kivy.lang import Builder
+#Builder.load_file('MB2.kv')
+
 sqlite_db = "C:/Users/USER-MB/source/GIT_Repo for myKivyApp01/myKivyApp01/myKivyAppDB.db"
 conn = sqlite3.connect(sqlite_db)
 c = conn.cursor()
@@ -42,15 +46,18 @@ class RootContainer(BoxLayout):
         print(results[0][3])
         self.lbl2.text = results[1][4]
         #self.lbl1.text = '\n'.join([x[2] for x in results])
-        myresult = '\n'.join([x[3] for x in results])
-        self.lbl3.text = myresult
+        #myresult = '\n'.join([x[3] for x in results])
+        #self.lbl3.text = myresult
+        for x in results:
+            print(x[3] + ' dd')
+            self.lbl3.text = self.lbl3.text + x[3]
 
-        #get to parent ScrollView and bind
-        scrollable = ScrollView(size_hint=(1, None), size=(Window.width, Window.height))
-        
+
         # dynamically add buttons 
-        #for x in myresult:
-            #x = self.add_widget(Button(text = os.listdir('saves')[x]))
+        #for x in results:
+        #    #x = self.add_widget(Button(text = os.listdir('saves')[x]))
+        #    button = Button(text=str(x[3]))
+        #    self.lbl3.add_widget(button)
 
 class MBApp(App):
     # this is a native function from Kivy to actually build the app using KV files
