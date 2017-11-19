@@ -20,21 +20,27 @@ sqlite_db = "C:/Users/USER-MB/source/GIT_Repo for myKivyApp01/myKivyApp01/myKivy
 conn = sqlite3.connect(sqlite_db)
 c = conn.cursor()
 
-class ScrollableLabel(ScrollView):
-    pass
+class DynamicButtons(Button):
+    theRoot = ObjectProperty(None)
+
 
 class RootContainer(BoxLayout):
-    instance = ObjectProperty(None)
-    layout_content = ObjectProperty(None)
+    instance1 = ObjectProperty(None)
+    instance2 = ObjectProperty(None)
 
     def __init__(self, **kwargs):
         super(RootContainer, self).__init__(**kwargs)
 
-    def clickAction1(self, instance):
-        #print(instance)
+    def clickAction2(self, instance2):
+        self.lbl2.text = instance2.text
+        #pass
+
+
+    def clickAction1(self, instance1):
+        #print(instance1)
         #identify the button pressed
         t = (1,)
-        buttonText = (instance.text[0:2],)
+        buttonText = (instance1.text[0:2],)
         print(buttonText)
         
         #use button text to query all related button info from DB
@@ -45,19 +51,20 @@ class RootContainer(BoxLayout):
         print(results)
         print(results[0][3])
         self.lbl2.text = results[1][4]
+        #bind root so we can identify on_press in the buttons below
+        #self.bind(self)
         # set height of grid before populating with buttons
         self.lbl3.bind(minimum_height=self.lbl3.setter('height'))
+        print("lbl3.bind complete")
+        # clear all old children
+        self.lbl3.clear_widgets()
+        print("lbl3 cleared")
         # dynamically add buttons
         for x in results:
-            self.lbl3.add_widget(Button(text=str(x[3])))
+            #self.lbl3.add_widget(Button(text=str(x[3])))
+            self.lbl3.add_widget(DynamicButtons(text=str(x[3]), theRoot = self))
 
-
-
-        # dynamically add buttons 
-        #for x in results:
-        #    #x = self.add_widget(Button(text = os.listdir('saves')[x]))
-        #    button = Button(text=str(x[3]))
-        #    self.lbl3.add_widget(button)
+    
 
 class MBApp(App):
     # this is a native function from Kivy to actually build the app using KV files

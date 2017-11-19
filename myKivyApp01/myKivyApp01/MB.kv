@@ -1,5 +1,10 @@
 #:kivy 1.0.9
 
+<DynamicButtons>:
+	text_size: self.size
+	on_press: self.theRoot.clickAction2(self)
+
+
 <RootContainer>:
 	id: theRoot
 	lbl1: my_labelH
@@ -24,14 +29,14 @@
 			id: my_buttonAC
 			text: "AC - Access Control"
 			text_size: self.size
-			size_hint: (.5,1)
+			#size_hint: (.5,1)
 			on_press: theRoot.clickAction1(self)
 
 		Button:
 			id: my_buttonAT
 			text: "AT - IT Security Awareness and Training"
 			text_size: self.size
-			size_hint: (.5,1)
+			#size_hint: (.5,1)
 			on_press: root.clickAction1(self)
 
     GridLayout:
