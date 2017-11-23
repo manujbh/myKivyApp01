@@ -1,6 +1,11 @@
 #:kivy 1.0.9
 
-<DynamicButtons>:
+<FamilyButtons>:
+	text_size: self.size
+	on_press: self.theRoot.clickAction1(self)
+
+
+<SubControlButtons>:
 	text_size: self.size
 	on_press: self.theRoot.clickAction2(self)
 
@@ -25,7 +30,19 @@
 			Rectangle: 
 				pos: self.pos 
 				size: self.size
+		Button:
+			id: my_buttonAC
+			text: "AC - Access Control"
+			text_size: self.size
+			#size_hint: (.5,1)
+			on_press: theRoot.clickAction1(self)
 
+		Button:
+			id: my_buttonAT
+			text: "AT - IT Security Awareness and Training"
+			text_size: self.size
+			#size_hint: (.5,1)
+			on_press: root.clickAction1(self)
 
     GridLayout:
 		rows: 3

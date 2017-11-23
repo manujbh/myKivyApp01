@@ -20,7 +20,10 @@ sqlite_db = "C:/Users/USER-MB/source/GIT_Repo for myKivyApp01/myKivyApp01/myKivy
 conn = sqlite3.connect(sqlite_db)
 c = conn.cursor()
 
-class DynamicButtons(Button):
+class SubControlButtons(Button):
+    theRoot = ObjectProperty(None)
+
+class FamilyButtons(Button):
     theRoot = ObjectProperty(None)
 
 
@@ -28,11 +31,12 @@ class RootContainer(BoxLayout):
     instance1 = ObjectProperty(None)
     instance2 = ObjectProperty(None)
 
+    #root.lbl5.add_widget(FamilyButtons(text="AC - Control", theRoot = self, text_size = self.size, on_press = self.clickAction1(self)))
+
     def __init__(self, **kwargs):
         super(RootContainer, self).__init__(**kwargs)
         #create buttons from query result
-        self.lbl5.add_widget(DynamicButtons(text="AC", theRoot = self, text_size = self.size, on_press = self.clickAction1(self)))
-        self.lbl5.add_widget(DynamicButtons(text="AT", theRoot = self))
+        #self.lbl5.add_widget(FamilyButtons(text="AC - Control", theRoot = self, text_size = self.size, on_press = self.clickAction1(self)))
 
 
     def clickAction2(self, instance2):
@@ -66,7 +70,7 @@ class RootContainer(BoxLayout):
         # dynamically add buttons
         for x in results:
             #self.lbl3.add_widget(Button(text=str(x[3])))
-            self.lbl3.add_widget(DynamicButtons(text=str(x[3]), theRoot = self))
+            self.lbl3.add_widget(SubControlButtons(text=str(x[3]), theRoot = self))
 
     
 
@@ -75,6 +79,12 @@ class MBApp(App):
     def build(self):
         #call RootContainer
         return RootContainer()
+        # remove the RootContainer call above. Make all the KV file formatting under App 
+        # (i.e. remove formatting from under RootContainer to one indent left)
+        # see ShowcaseApp and how it treats screen organization
+        print("RootContainer created")
+        root.lbl3.clear_widgets()
+        #root.lbl5.add_widget(FamilyButtons(text="AC - Control", theRoot = self, text_size = self.size, on_press = self.clickAction1(self)))
 
 
 if __name__ == '__main__':
