@@ -30,6 +30,10 @@ class RootContainer(BoxLayout):
 
     def __init__(self, **kwargs):
         super(RootContainer, self).__init__(**kwargs)
+        #create buttons from query result
+        self.lbl5.add_widget(DynamicButtons(text="AC", theRoot = self, text_size = self.size, on_press = self.clickAction1(self)))
+        self.lbl5.add_widget(DynamicButtons(text="AT", theRoot = self))
+
 
     def clickAction2(self, instance2):
         self.lbl2.text = instance2.text
@@ -48,8 +52,8 @@ class RootContainer(BoxLayout):
 
         #fetch results of query, fetchall() can only be used once
         results = c.fetchall()
-        print(results)
-        print(results[0][3])
+        #print(results)
+        #print(results[0][3])
         self.lbl2.text = results[1][4]
         #bind root so we can identify on_press in the buttons below
         #self.bind(self)
@@ -69,6 +73,7 @@ class RootContainer(BoxLayout):
 class MBApp(App):
     # this is a native function from Kivy to actually build the app using KV files
     def build(self):
+        #call RootContainer
         return RootContainer()
 
 

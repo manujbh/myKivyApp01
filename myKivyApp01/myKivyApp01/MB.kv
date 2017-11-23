@@ -11,6 +11,7 @@
 	lbl2: my_labelC
 	lbl3: my_btnGrid
 	lbl4: my_btnScroll
+	lbl5: my_box01
 
 	BoxLayout:
 		id: my_box01
@@ -25,19 +26,6 @@
 				pos: self.pos 
 				size: self.size
 
-		Button:
-			id: my_buttonAC
-			text: "AC - Access Control"
-			text_size: self.size
-			#size_hint: (.5,1)
-			on_press: theRoot.clickAction1(self)
-
-		Button:
-			id: my_buttonAT
-			text: "AT - IT Security Awareness and Training"
-			text_size: self.size
-			#size_hint: (.5,1)
-			on_press: root.clickAction1(self)
 
     GridLayout:
 		rows: 3
@@ -84,7 +72,7 @@
 					Rectangle:
 						pos: self.pos
 						size: self.size
-				text: "Click button for content to be displayed here. Content for button clicked ......."
+				text: "Click button for content (with field reference GUIDE) to be displayed here. Content for button clicked ......."
 		
 		ScrollView:
 			id: my_btnScroll
