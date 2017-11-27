@@ -34,7 +34,7 @@ class RootContainer(BoxLayout):
     def __init__(self, **kwargs):
         super(RootContainer, self).__init__(**kwargs)
         #create buttons from query result
-        self.lbl5.add_widget(Button(text="ACC"))
+        self.lbl5.add_widget(Button(text="ACC", text_size = self.size))
 
 
     def clickAction2(self, instance2):
@@ -77,6 +77,12 @@ class MBApp(App):
     def build(self):
         #call RootContainer
         return RootContainer()
+        # remove the RootContainer call above. Make all the KV file formatting under App 
+        # (i.e. remove formatting from under RootContainer to one indent left)
+        # see ShowcaseApp and how it treats screen organization
+        print("RootContainer created")
+        root.lbl3.clear_widgets()
+        #root.lbl5.add_widget(FamilyButtons(text="AC - Control", theRoot = self, text_size = self.size, on_press = self.clickAction1(self)))
 
 
 if __name__ == '__main__':
