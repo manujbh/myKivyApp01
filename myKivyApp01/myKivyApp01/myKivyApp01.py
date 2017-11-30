@@ -36,11 +36,7 @@ class RootContainer(BoxLayout):
     def __init__(self, **kwargs):
         super(RootContainer, self).__init__(**kwargs)
         #create buttons from query result
-        #self.lbl5.add_widget(Button(text=MY_BUTTON_TEXT, text_size = self.size, on_press=lambda x:self.clickAction1(MY_BUTTON_TEXT)))
-        self.lbl5.add_widget(Button(text=MY_BUTTON_TEXT, text_size = self.size, on_press=lambda x:self.stringAction1(MY_BUTTON_TEXT)))
-        #self.lbl5 = Button(text="ACC", text_size = self.size)
-        #self.lbl5.bind(on_press=lambda x:self.clickAction1(self))
-        #self.add_widget(self.lbl5)
+        self.lbl5.add_widget(Button(text=MY_BUTTON_TEXT, text_size = self.size, on_press=lambda x:self.clickAction1(MY_BUTTON_TEXT)))
 
 
     def clickAction2(self, instance2):
@@ -48,32 +44,33 @@ class RootContainer(BoxLayout):
         #pass
 
 
+    def callClickAction1(self, instance1):
+        #identify the button pressed
+        buttonText = instance1.text[0:2]
+        print(buttonText)
+        self.clickAction1(buttonText)
+
+
     def stringAction1(self, string1):
         print(string1)
 
 
-    def clickAction1(self, instance1):
-        print("instance = " + str(instance1))
-        #identify the button pressed
-        buttonText = (instance1.text[0:2],)
-        print(buttonText)
-        
+    def clickAction1(self, buttonString):
         #use button text to query all related button info from DB
-        c.execute('select * from moderateBaseline where family=?',buttonText)
-
+        c.execute('select * from moderateBaseline where family=?',(buttonString,))
         #fetch results of query, fetchall() can only be used once
         results = c.fetchall()
-        #print(results)
-        #print(results[0][3])
+        #if results is an empty list then exit this function
+        if not results:
+            print("exit function")
+            return
+        
+        
         self.lbl2.text = results[1][4]
-        #bind root so we can identify on_press in the buttons below
-        #self.bind(self)
         # set height of grid before populating with buttons
         self.lbl3.bind(minimum_height=self.lbl3.setter('height'))
-        print("lbl3.bind complete")
         # clear all old children
         self.lbl3.clear_widgets()
-        print("lbl3 cleared")
         # dynamically add buttons
         for x in results:
             #self.lbl3.add_widget(Button(text=str(x[3])))
@@ -86,10 +83,6 @@ class MBApp(App):
     def build(self):
         #call RootContainer
         return RootContainer()
-        # remove the RootContainer call above. Make all the KV file formatting under App 
-        # (i.e. remove formatting from under RootContainer to one indent left)
-        # see ShowcaseApp and how it treats screen organization
-        #root.lbl5.add_widget(FamilyButtons(text="AC - Control", theRoot = self, text_size = self.size, on_press = self.clickAction1(self)))
 
 
 if __name__ == '__main__':
