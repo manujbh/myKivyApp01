@@ -16,6 +16,8 @@ from kivy.core.window import Window
 #from kivy.lang import Builder
 #Builder.load_file('MB2.kv')
 
+MY_BUTTON_TEXT = "ACCZ"
+
 sqlite_db = "C:/Users/USER-MB/source/GIT_Repo for myKivyApp01/myKivyApp01/myKivyAppDB.db"
 conn = sqlite3.connect(sqlite_db)
 c = conn.cursor()
@@ -34,7 +36,11 @@ class RootContainer(BoxLayout):
     def __init__(self, **kwargs):
         super(RootContainer, self).__init__(**kwargs)
         #create buttons from query result
-        self.lbl5.add_widget(Button(text="ACC", text_size = self.size))
+        #self.lbl5.add_widget(Button(text=MY_BUTTON_TEXT, text_size = self.size, on_press=lambda x:self.clickAction1(MY_BUTTON_TEXT)))
+        self.lbl5.add_widget(Button(text=MY_BUTTON_TEXT, text_size = self.size, on_press=lambda x:self.stringAction1(MY_BUTTON_TEXT)))
+        #self.lbl5 = Button(text="ACC", text_size = self.size)
+        #self.lbl5.bind(on_press=lambda x:self.clickAction1(self))
+        #self.add_widget(self.lbl5)
 
 
     def clickAction2(self, instance2):
@@ -42,10 +48,13 @@ class RootContainer(BoxLayout):
         #pass
 
 
+    def stringAction1(self, string1):
+        print(string1)
+
+
     def clickAction1(self, instance1):
-        #print(instance1)
+        print("instance = " + str(instance1))
         #identify the button pressed
-        t = (1,)
         buttonText = (instance1.text[0:2],)
         print(buttonText)
         
@@ -80,8 +89,6 @@ class MBApp(App):
         # remove the RootContainer call above. Make all the KV file formatting under App 
         # (i.e. remove formatting from under RootContainer to one indent left)
         # see ShowcaseApp and how it treats screen organization
-        print("RootContainer created")
-        root.lbl3.clear_widgets()
         #root.lbl5.add_widget(FamilyButtons(text="AC - Control", theRoot = self, text_size = self.size, on_press = self.clickAction1(self)))
 
 
