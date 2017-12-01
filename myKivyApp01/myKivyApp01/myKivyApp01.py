@@ -57,7 +57,7 @@ class RootContainer(BoxLayout):
 
     def clickAction1(self, buttonString):
         #use button text to query all related button info from DB
-        c.execute('select * from moderateBaseline where family=?',(buttonString,))
+        c.execute('select * from table1 where Control_Family=?',(buttonString,))
         #fetch results of query, fetchall() can only be used once
         results = c.fetchall()
         #if results is an empty list then exit this function

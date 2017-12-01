@@ -1,0 +1,152 @@
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+https://www.tutorialspoint.com/sqlite/sqlite_create_table.htm
+
+SQLite CREATE TABLE statement is used to create a new table in any of the given database. Creating a basic table involves naming the table and defining its columns and each column's data type.
+
+Syntax
+Following is the basic syntax of CREATE TABLE statement.
+
+CREATE TABLE database_name.table_name(
+   column1 datatype PRIMARY KEY(one or more columns),
+   column2 datatype,
+   column3 datatype,
+   .....
+   columnN datatype
+);
+CREATE TABLE is the keyword telling the database system to create a new table. The unique name or identifier for the table follows the CREATE TABLE statement. Optionally, you can specify database_name along with table_name.
+
+Example
+Following is an example which creates a COMPANY table with ID as the primary key and NOT NULL are the constraints showing that these fields cannot be NULL while creating records in this table.
+
+sqlite> CREATE TABLE COMPANY(
+   ID INT PRIMARY KEY     NOT NULL,
+   NAME           TEXT    NOT NULL,
+   AGE            INT     NOT NULL,
+   ADDRESS        CHAR(50),
+   SALARY         REAL
+);
+Let us create one more table, which we will use in our exercises in subsequent chapters.
+
+sqlite> CREATE TABLE DEPARTMENT(
+   ID INT PRIMARY KEY      NOT NULL,
+   DEPT           CHAR(50) NOT NULL,
+   EMP_ID         INT      NOT NULL
+);
+You can verify if your table has been created successfully using SQLite command .tables command, which will be used to list down all the tables in an attached database.
+
+sqlite>.tables
+COMPANY     DEPARTMENT
+Here, you can see the COMPANY table twice because its showing COMPANY table for main database and test.COMPANY table for 'test' alias created for your testDB.db. You can get complete information about a table using the following SQLite .schema command.
+
+sqlite>.schema COMPANY
+CREATE TABLE COMPANY(
+   ID INT PRIMARY KEY     NOT NULL,
+   NAME           TEXT    NOT NULL,
+   AGE            INT     NOT NULL,
+   ADDRESS        CHAR(50),
+   SALARY         REAL
+);
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Importing a CSV file into a table using sqlite3 tool
+        http://www.sqlitetutorial.net/sqlite-import-csv/
+
+In the first scenario, you want to import data from CSV file into a table that does not exist in the SQLite database.
+
+FIRST SCENARIO, 
+   the sqlite3 tool creates the table. The sqlite3 tool uses the first row of the 
+    CSV file as the names of the columns of the table.
+SECOND SCENARIO, 
+   the sqlite3 tool import data from the second row of the CSV file into the table.
+   We will import a CSV file named city.csv with two columns: name and population. 
+   
+
+=====================================================
+
+FIRST SCENARIO
+First, set the mode to CSV to instruct the command-line shell program to interpret the input file as a CSV file. To do this, you use the .mode command as follows:
+
+
+sqlite> .mode csv
+1
+sqlite> .mode csv
+Second, use the .import FILE TABLE command to import the data from the city.csv file into the cities table.
+
+
+sqlite>.import c:/sqlite/city.csv cities
+1
+sqlite>.import c:/sqlite/city.csv cities
+To verify the import, you use the .schema command to display the structure of the cities table.
+
+
+sqlite> .schema cities
+CREATE TABLE cities(
+  "name" TEXT,
+  "population" TEXT
+);
+1
+2
+3
+4
+5
+sqlite> .schema cities
+CREATE TABLE cities(
+  "name" TEXT,
+  "population" TEXT
+);
+To view the data of the cities table, you use the following SELECT statement.
+
+
+SELECT name, 
+       population
+FROM cities;
+1
+2
+3
+SELECT name, 
+       population
+FROM cities;
+
+=====================================================
+
+SECOND SCENARIO
+In the second scenario, the table is already available in the database and you just need to import the data.
+
+First, remove the cities table that you have created.
+
+
+DROP TABLE IF EXISTS cities;
+1
+DROP TABLE IF EXISTS cities;
+Second, use the following CREATE TABLE statement to create the cities table.
+
+
+CREATE TABLE cities(
+  name TEXT NOT NULL,
+  population INTEGER NOT NULL 
+);
+1
+2
+3
+4
+CREATE TABLE cities(
+  name TEXT NOT NULL,
+  population INTEGER NOT NULL 
+);
+If the table already exists, the sqlite3 tool uses all the rows, including the first row, in the CSV file as the actual data to import. Therefore, you should delete the first row of the CSV file.
+
+The following commands import the city_without_header.csv file into the cities table.
+
+
+sqlite> .mode csv
+sqlite> .import c:/sqlite/city_no_header.csv cities
+1
+2
+sqlite> .mode csv
+sqlite> .import c:/sqlite/city_no_header.csv cities
+
+=====================================================
+
