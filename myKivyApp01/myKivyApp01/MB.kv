@@ -18,8 +18,8 @@
 	lbl4: my_btnScroll
 	lbl5: my_box01
 
+	#left side GRID with control family buttons
 	BoxLayout:
-		id: my_box01
 		orientation: 'vertical'
 		spacing: 20
 		padding: 20
@@ -30,20 +30,19 @@
 			Rectangle: 
 				pos: self.pos 
 				size: self.size
-		Button:
-			id: my_buttonAC
-			text: "AC - Access Control"
-			text_size: self.size
-			#size_hint: (.5,1)
-			on_press: theRoot.callClickAction1(self)
 
-		Button:
-			id: my_buttonAT
-			text: "AT - IT Security Awareness and Training"
-			text_size: self.size
-			#size_hint: (.5,1)
-			on_press: root.callClickAction1(self)
+		ScrollView:
+			bar_width: 12
+			bar_color: 0, .63, 0, .9
+			GridLayout:
+				id: my_box01
+				size_hint_y: None
+				cols: 1
+				spacing: 0,0
+				padding: 0,0
 
+
+	#right side GRID with content
     GridLayout:
 		rows: 3
 		cols: 1
@@ -63,6 +62,7 @@
 			bar_color: 0, .63, 0, .9
 			Label:
 				id: my_labelH
+				markup: True
 				size_hint: 1, None
 				text_size: self.width, None
 				height: self.texture_size[1]
@@ -72,7 +72,7 @@
 					Rectangle:
 						pos: self.pos
 						size: self.size
-				text: "Current control step (number)"
+				text: "Acceptable evidence details for control step will be displayed here"
 
 
 		ScrollView:
@@ -80,6 +80,7 @@
 			bar_color: 0, .63, 0, .9
 			Label:
 				id: my_labelC
+				markup: True
 				size_hint: 1, None
 				text_size: self.width, None
 				height: self.texture_size[1]
@@ -109,5 +110,5 @@
 						pos: self.pos
 						size: self.size
 				Label:
-					text: "Scrolling text goes here ....."
+					text: "Control Steps for Control Family displayed here"
 

@@ -150,3 +150,46 @@ sqlite> .import c:/sqlite/city_no_header.csv cities
 
 =====================================================
 
+
+to add the primary key to the cities table, you need to perform the script above:
+
+
+PRAGMA foreign_keys=off;
+
+BEGIN TRANSACTION;
+
+ALTER TABLE cities RENAME TO old_cities;
+
+CREATE TABLE cities (
+	id INTEGER NOT NULL PRIMARY KEY,
+	name text NOT NULL
+);
+
+INSERT INTO cities SELECT * FROM old_cities;
+
+DROP TABLE old_cities;
+
+COMMIT;
+
+PRAGMA foreign_keys=on;
+
+PRAGMA foreign_keys=off;
+ 
+BEGIN TRANSACTION;
+ 
+ALTER TABLE cities RENAME TO old_cities;
+ 
+CREATE TABLE cities (
+ id INTEGER NOT NULL PRIMARY KEY,
+ name text NOT NULL
+);
+ 
+INSERT INTO cities SELECT * FROM old_cities;
+ 
+DROP TABLE old_cities;
+ 
+COMMIT;
+ 
+PRAGMA foreign_keys=on;
+
+=====================================================
