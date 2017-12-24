@@ -20,26 +20,16 @@
 
 	#left side GRID with control family buttons
 	BoxLayout:
+		id: my_box01
 		orientation: 'vertical'
 		spacing: 20
 		padding: 20
-
 		canvas: 
 			Color: 
 				rgb: 0, .83, 0 
 			Rectangle: 
 				pos: self.pos 
 				size: self.size
-
-		ScrollView:
-			bar_width: 12
-			bar_color: 0, .63, 0, .9
-			GridLayout:
-				id: my_box01
-				size_hint_y: None
-				cols: 1
-				spacing: 0,0
-				padding: 0,0
 
 
 	#right side GRID with content
