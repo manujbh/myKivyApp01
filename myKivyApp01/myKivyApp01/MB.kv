@@ -1,6 +1,11 @@
 #:kivy 1.0.9
 
 BoxLayout:
+	id: mykv
+	substep: substep
+	controlfamily: controlfamily
+	mygrid: mygrid
+
 	orientation: 'vertical'
 	# canvas.after will implement after all the children in BoxLayout
 	canvas.after:
@@ -21,22 +26,32 @@ BoxLayout:
 				rectangle: self.x+1,self.y+1,self.width-1,self.height-1
 				width: 2
 		Spinner:
-			text: 'Family'
-			values: ('AC','AT', 'AU', 'CM')
+			id: controlfamily
+			text: 'Control Family'
+			values: app.family_names
 			size_hint_y: None
 			height: 100
+			on_text: app.onClickAction1(self)
 		Spinner:
-			text: "sub-step"
-			values: ('AC-01.02.02.01', 'AC-04.02.01.01')
+			id: substep
+			text: "Sub-Step"
+			values: app.substep_names
 			size_hint_y:None
 			height:100
+			on_text: app.onClickAction2(self)
 
 
 	#bottom of BoxLayout
 	GridLayout:
+		id: mygrid
 		cols:1
 		canvas:
 			Color:
-				rgb: .8,1,1
+				#rgb: .8,1,1
+				rgb: .3,.2,.2
 			Rectangle:
 				size: self.size
+		Label:
+			#text: "Select options above for content (with field reference GUIDE) to be displayed here"
+			text: app.substep_content
+
