@@ -1,19 +1,20 @@
 #:kivy 1.0.9
-
-BoxLayout:
-	id: mykv
+GridLayout:
+	rows: 2
 	substep: substep
 	controlfamily: controlfamily
 	mygrid: mygrid
+	mylabel: mylabel
 
 	orientation: 'vertical'
 	# canvas.after will implement after all the children in BoxLayout
 	canvas.after:
         Color:
+			#blue
             rgb: .06, .09, .9
         Line:
             rectangle: self.x+1,self.y+1,self.width-1,self.height-1
-            width:10
+            width: 1
 
 	#top of BoxLayout
 	GridLayout:
@@ -21,6 +22,7 @@ BoxLayout:
 		size_hint_y: None
 		canvas.after:
 			Color:
+				#red
 				rgb: 1,0,0
 			Line:
 				rectangle: self.x+1,self.y+1,self.width-1,self.height-1
@@ -44,14 +46,29 @@ BoxLayout:
 	#bottom of BoxLayout
 	GridLayout:
 		id: mygrid
-		cols:1
-		canvas:
+		cols: 1
+		rows: 1
+		#size_hint: 1, None
+		canvas.before:
 			Color:
+				#coral blue
 				#rgb: .8,1,1
+				#reddish brown
 				rgb: .3,.2,.2
 			Rectangle:
 				size: self.size
-		Label:
-			#text: "Select options above for content (with field reference GUIDE) to be displayed here"
-			text: app.substep_content
+			Line:
+				rectangle: self.x+1,self.y+1,self.width-1,self.height-1
+				dash_offset: 5
+				dash_length: 10
+		ScrollView:
+			bar_width: 12
+			bar_color: 0, .63, 0, .9
+			Label:
+				id: mylabel
+				text: "Select options above for content (with field reference GUIDE) to be displayed here"
+				#text_size: self.size
+				size_hint_y: None
+				text_size: self.width, None
+				height: self.texture_size[1]
 
