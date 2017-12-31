@@ -64,8 +64,11 @@ class MBApp(App):
         if not results2:
             print("exit function because onClickAction2 is empty")
             return
-        self.root.ids.mylabel.__self__.text = "[b]Control Step (" + querytext + ") Description:[/b] \n" + results2[0][0] + "\n [b]Acceptable Evidence for " + querytext + " :[/b] \n" + results2[0][1] + "\n"
-
+        if results2[0][1] == '#N/A' or results2[0][1] == '#REF!':
+            evidenceText = 'Guidance not available'
+        else:
+            evidenceText = results2[0][1]
+        self.root.ids.mylabel.__self__.text = '\n\n [b]Control Step (' + querytext + ') Description:[/b] \n' + results2[0][0] + '\n\n\n [b]Acceptable Evidence for ' + querytext + ' :[/b] \n' + evidenceText + '\n'
 
 
 if __name__ == '__main__':
