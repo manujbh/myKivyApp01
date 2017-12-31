@@ -20,7 +20,8 @@ class MBApp(App):
     substep_names = ListProperty([])
     instance1 = ObjectProperty(None)
     instance2 = ObjectProperty(None)
-
+    substep_content = StringProperty()
+    substep_content = "##############"
 
     # this is a native function from Kivy to actually build the app using KV files
     def build(self):
@@ -41,30 +42,36 @@ class MBApp(App):
 
     def onClickAction1(self, instance1):
         querytext = instance1.text
-        #print('The spinner has text: ', querytext)
+        print('The spinner has text: ', querytext)
         c.execute('select control_step from table1 where control_family=?',(querytext,))
         #fetch results of query, fetchall() can only be used once
         results2 = c.fetchall()
         #if results is an empty list then exit this function
         if not results2:
-            print("exit function because onClickAction1 is empty")
+            print("exit function")
             return
         mysubsteps = [i[0] for i in results2]
-        #print(mysubsteps)
+        print(mysubsteps)
         self.substep_names = sorted(mysubsteps)
 
     def onClickAction2(self, instance2):
         querytext = instance2.text
-        #print('The spinner2 has text: ', querytext)
+        print('The spinner2 has text: ', querytext)
         #use button text to query all related button info from DB; don't use %s its insecure always use ? with a tuple as input
         # The ? SQL parameter interpolation adds quoting for you
         c.execute('select control_step_content, acceptable_evidence from table1 where control_step = ?',(querytext,))
         results2 = c.fetchall()
         #if results is an empty list then exit this function
         if not results2:
-            print("exit function because onClickAction2 is empty")
+            print("exit function because results2 is empty")
             return
-        self.root.ids.mylabel.__self__.text = "[b]Control Step (" + querytext + ") Description:[/b] \n" + results2[0][0] + "\n [b]Acceptable Evidence for " + querytext + " :[/b] \n" + results2[0][1] + "\n"
+        #mysubsteps = [i[0] for i in results2]
+        #print(mysubsteps)
+        #self.substep_names = sorted(mysubsteps)
+        print(results2)
+        #self.root.ids.mygrid.text = "Control details and Acceptable evidence details..."
+        substep_content = "Control details and Acceptable evidence details..."
+        print(substep_content)
 
 
 
